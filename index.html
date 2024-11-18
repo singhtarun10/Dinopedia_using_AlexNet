@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dinopedia 🦖</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; color: #333; }
+        .content-section { padding: 20px; background-color: #fff; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .image-preview { max-width: 300px; margin-top: 20px; border: 1px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Dinopedia 🦖</h1>
+
+    <!-- Error Message -->
+    {% if error %}
+        <div style="color: red; font-weight: bold;">{{ error }}</div>
+    {% endif %}
+
+    <!-- Upload Form -->
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="file">Upload a Dinosaur Image:</label>
+        <input type="file" name="file" id="file" required>
+        <button type="submit">Classify Dinosaur</button>
+    </form>
+
+    <!-- Display Uploaded Image -->
+    {% if uploaded_image %}
+        <div class="content-section">
+            <h2>Your Uploaded Image</h2>
+            <img src="{{ uploaded_image }}" alt="Uploaded  Image" class="image-preview">
+        </div>
+    {% endif %}
+
+    <!-- Display Dinosaur Information -->
+    {% if species_name %}
+        <div class="content-section">
+            <h2>About {{ species_name }}</h2>
+            <p>{{ dino_info.description.overall }}</p>
+        </div>
+
+        {% if dino_info.history %}
+            <div class="content-section">
+                <h3>History</h3>
+                <p>{{ dino_info.history }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
